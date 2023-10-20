@@ -59,32 +59,30 @@ function limitedRepeat() {
 
 /* CHALLENGE 6 */
 
-function everyXsecsForYsecs(func,interval, duration) {
-  const inter=setInterval(() => {
+function everyXsecsForYsecs(func, interval, duration) {
+  const inter = setInterval(() => {
     func();
-  }, interval*1000);
+  }, interval * 1000);
   setTimeout(() => {
     clearInterval(inter);
-  }, duration*1000);
+  }, duration * 1000);
 }
 // Uncomment the following lines to check your work!
 //  function theEnd() {
 //    console.log('This is the end!');
 //  }
- //everyXsecsForYsecs(theEnd, 2, 20); // should invoke theEnd function every 2 seconds, for 20 seconds): This is the end!
+//everyXsecsForYsecs(theEnd, 2, 20); // should invoke theEnd function every 2 seconds, for 20 seconds): This is the end!
 
 /* CHALLENGE 7 */
 
 function delayCounter(target, wait) {
-    let count=1;
-    return function(){
-       const inter= setInterval(() => {
-            console.log(count++);
-            if(count>target)
-            clearInterval(inter);
-        }, wait);
-    } 
-    
+  let count = 1;
+  return function () {
+    const inter = setInterval(() => {
+      console.log(count++);
+      if (count > target) clearInterval(inter);
+    }, wait);
+  };
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
@@ -96,15 +94,15 @@ function delayCounter(target, wait) {
 
 /* CHALLENGE 8 */
 
-function promised (val) {
-    let promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-          resolve(val)
-      }, 2000)
-    })
-        
-    return promise;
-  }
+function promised(val) {
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(val);
+    }, 2000);
+  });
+
+  return promise;
+}
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
 // const createPromise = promised('wait for it...');
@@ -115,16 +113,16 @@ function promised (val) {
 
 class SecondClock {
   constructor(cb) {
-   this.cb=cb;
-   this.seconds=0;
+    this.cb = cb;
+    this.seconds = 0;
   }
-  start(){
-    this.id=setInterval(()=>{
-        this.cb(++this.seconds%60)
-    },1000)
+  start() {
+    this.id = setInterval(() => {
+      this.cb(++this.seconds % 60);
+    }, 1000);
   }
-  reset(){
-    this.seconds=0;
+  reset() {
+    this.seconds = 0;
     clearInterval(this.id);
   }
 }
@@ -141,22 +139,32 @@ class SecondClock {
 /* CHALLENGE 10 */
 
 function debounce(callback, interval) {
-    let duration = 0;
-    let id;
-    return function(){
-      if(duration <= 0) {
-        duration = interval;
-        clearInterval(id);
-          id = setInterval(() => {duration -= 100}, 100);
-        return callback();
-      }
+  let duration = 0;
+  let id;
+  return function () {
+    if (duration <= 0) {
+      duration = interval;
+      clearInterval(id);
+      id = setInterval(() => {
+        duration -= 100;
+      }, 100);
+      return callback();
     }
-  }
+  };
+}
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
- function giveHi() { return 'hi'; }
- const giveHiSometimes = debounce(giveHi, 3000);
+function giveHi() {
+  return "hi";
+}
+const giveHiSometimes = debounce(giveHi, 3000);
 console.log(giveHiSometimes()); // -> 'hi'
-setTimeout(function() { console.log(giveHiSometimes()); }, 2000); // -> undefined
-setTimeout(function() { console.log(giveHiSometimes()); }, 4000); // -> undefined
-setTimeout(function() { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
+setTimeout(function () {
+  console.log(giveHiSometimes());
+}, 2000); // -> undefined
+setTimeout(function () {
+  console.log(giveHiSometimes());
+}, 4000); // -> undefined
+setTimeout(function () {
+  console.log(giveHiSometimes());
+}, 8000); // -> 'hi'
